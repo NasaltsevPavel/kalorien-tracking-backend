@@ -16,7 +16,5 @@ jobs:
         with:
           distribution: "adopt"
           java-version: "11"
-      - name: Grand execute permission for gradlew
-        run: chmond +x gradlew
       - name: Run Backend Tests
         run: ./gradlew test
