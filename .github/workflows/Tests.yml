@@ -15,6 +15,8 @@ jobs:
         uses: actions/setup-java@v2
         with:
           distribution: "adopt"
-          java-version: "11"
+          java-version: "16"
+      - name: Grand execute permission for gradlew
+        run: chmod +x gradlew
       - name: Run Backend Tests
         run: ./gradlew test
