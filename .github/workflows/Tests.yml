@@ -19,4 +19,4 @@ jobs:
       - name: Grand execute permission for gradlew
         run: chmod +x gradlew
       - name: Run Backend Tests
-        run: ./gradlew clean build
+        run: ./gradlew test
