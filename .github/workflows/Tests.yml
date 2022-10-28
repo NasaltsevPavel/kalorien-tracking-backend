@@ -1,9 +1,13 @@
 name: CI
 
-on: [ push ]
+on:
+  push:
+    brances: [main]
+  pull_request:
+    branches: [main]
 
 jobs:
-  test:
+  build:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
@@ -11,6 +15,8 @@ jobs:
         uses: actions/setup-java@v2
         with:
           distribution: "adopt"
-          java-version: 16
-      - name: clean build
+          java-version: "16"
+      - name: Grand execute permission for gradlew
+        run: chmond +x gradlew
+      - name: Run Backend Tests
         run: ./gradlew test
