@@ -1,116 +1,62 @@
 package webtech.User;
 
 
-public class User {
+import javax.persistence.*;
 
+
+@Entity
+public class UserEntity {
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "USER_ID")
     private long id;
+
+    @Column(name = "USER_NAME", nullable = false)
     private String username;
+
+    @Column(name = "USER_PASSWORT", nullable = false)
     private String passwort;
+
+    @Column(name = "USER_WEIGHT", nullable = false)
     private double weight;
+
+    @Column(name = "USER_HEIGHT", nullable = false)
     private double height;
+
+    @Column(name = "USER_AGE")
     private int age;
+
+    @Column(name = "USER_BMI", nullable = false)
     private double bmi;
+
+    @Column(name = "USER_CATEGORY")
     private String category;
+
+    @Column(name = "GOAL_WEIGHT", nullable = false)
     private int goalW;
+    @Column(name = "USER_BMR", nullable = false)
     private int bmr;
 
-    public User(long id, String username, String passwort, double weight, double height, int age, int goalW) {
-        this.id = id;
+
+    public UserEntity(String username, String passwort, double weight,double height, int age, double bmi,String category, int goalW, int bmr) {
         this.username = username;
         this.passwort = passwort;
         this.weight = weight;
         this.height = height;
         this.age = age;
-        this.bmi = calcBmi();
-        this.category = calcRes();
+        this.bmi = bmi;
+        this.category = category;
         this.goalW = goalW;
-        this.bmr = calcBmr();
+        this.bmr = bmr;
     }
 
-    private int calcBmr() {
+    protected UserEntity(){
 
-        bmr += (66.47 + (13.75 * weight) + (5.003 * height) - (6.755 * age));
-
-        if (goalW>weight){
-            bmr = bmr + 500;
-        }
-
-        if ((goalW<weight)){
-            bmr = bmr - 500;
-        }
-
-        return bmr;
-
-
-    }
-
-    private String calcRes() {
-
-        if (this.bmi < 16) {
-
-            category = "Severe Thinness";
-
-        }
-
-        if (this.bmi > 16 && this.bmi < 17) {
-
-            category = "Moderate Thinnes";
-
-        }
-        if (this.bmi > 17 && this.bmi < 18.5) {
-
-            category = "Mild Thinness";
-
-        }
-
-        if (this.bmi > 18.5 && this.bmi < 25) {
-
-            category = "Normal";
-
-        }
-
-        if (this.bmi > 25 && this.bmi < 30) {
-
-            category = "Overweight";
-
-        }
-
-        if (this.bmi > 30 && this.bmi < 35) {
-
-            category = "Obese Class I";
-
-        }
-
-        if (this.bmi > 35 && this.bmi < 40) {
-
-            category = "Obese Class II";
-
-        }
-
-        if (this.bmi > 40) {
-
-            category = "Obese Class III";
-
-        }
-
-        return category;
-
-
-    }
-
-    public double calcBmi() {
-
-        bmi = weight /((height/100)*(height/100));
-
-        return bmi;
     }
 
     public long getId() {
         return id;
-    }
-
-    public void setId(long id) {
-        this.id = id;
     }
 
     public int getBmr() {
