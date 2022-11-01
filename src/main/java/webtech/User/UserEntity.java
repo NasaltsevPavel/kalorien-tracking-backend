@@ -39,7 +39,10 @@ public class UserEntity {
     private int bmr;
 
 
-    public UserEntity(String username, String passwort, double weight,double height, int age, double bmi,String category, int goalW, int bmr) {
+
+    public UserEntity(String username, String passwort,
+                      double weight,double height, int age, double bmi,String category,
+                      int goalW, int bmr) {
         this.username = username;
         this.passwort = passwort;
         this.weight = weight;
@@ -49,6 +52,7 @@ public class UserEntity {
         this.category = category;
         this.goalW = goalW;
         this.bmr = bmr;
+
     }
 
     protected UserEntity(){
@@ -130,4 +134,5 @@ public class UserEntity {
     public void setCategory(String category) {
         this.category = category;
     }
+
 }

@@ -14,7 +14,9 @@ public class UserCreateOrUpdateRequest {
     private int bmr;
 
 
-    public UserCreateOrUpdateRequest(String username, String passwort, int weight, int height, int age, double bmi, String category, int goalW
+
+    public UserCreateOrUpdateRequest(String username, String passwort, int weight, int height, int age, double bmi,
+                                     String category, int goalW
             , int bmr) {
         this.username = username;
         this.passwort = passwort;
@@ -25,6 +27,7 @@ public class UserCreateOrUpdateRequest {
         this.category = category;
         this.goalW = goalW;
         this.bmr = bmr;
+
     }
 
 

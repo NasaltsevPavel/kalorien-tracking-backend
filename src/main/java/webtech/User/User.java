@@ -1,6 +1,13 @@
 package webtech.User;
 
 
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
+import org.springframework.security.core.userdetails.UserDetails;
+
+import java.util.Collection;
+import java.util.Collections;
+
 public class User {
 
     private long id;
@@ -14,7 +21,10 @@ public class User {
     private int goalW;
     private int bmr;
 
-    public User(long id, String username, String passwort, double weight, double height, int age, int goalW) {
+
+    public User(long id, String username, String passwort,
+                double weight, double height,
+                int age, int goalW) {
         this.id = id;
         this.username = username;
         this.passwort = passwort;
@@ -25,6 +35,7 @@ public class User {
         this.category = calcRes();
         this.goalW = goalW;
         this.bmr = calcBmr();
+
     }
 
     private int calcBmr() {
@@ -161,17 +172,20 @@ public class User {
         this.height = height;
     }
 
+
+    public String getPassword() {
+        return passwort;
+    }
+
     public String getUsername() {
         return username;
     }
+
 
     public void setUsername(String username) {
         this.username = username;
     }
 
-    public String getPasswort() {
-        return passwort;
-    }
 
     public void setPasswort(String passwort) {
         this.passwort = passwort;
@@ -184,4 +198,10 @@ public class User {
     public void setCategory(String category) {
         this.category = category;
     }
+
+    public String getPasswort() {
+        return passwort;
+    }
+
+
 }
