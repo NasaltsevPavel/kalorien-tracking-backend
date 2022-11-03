@@ -1,5 +1,8 @@
 package webtech.User;
 
+import java.util.HashMap;
+import java.util.Map;
+
 public class UserCreateOrUpdateRequest {
 
 
@@ -13,6 +16,7 @@ public class UserCreateOrUpdateRequest {
     private int goalW;
     private int bmr;
     private String gender;
+
 
 
 
@@ -30,8 +34,8 @@ public class UserCreateOrUpdateRequest {
         this.bmr = bmr;
         this.gender=gender;
 
-    }
 
+    }
 
     public String getGender() {
         return gender;

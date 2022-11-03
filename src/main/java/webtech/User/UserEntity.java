@@ -1,7 +1,13 @@
 package webtech.User;
 
 
+import webtech.Product.Product;
+import webtech.Product.ProductEntity;
+
 import javax.persistence.*;
+import java.time.LocalDate;
+import java.util.HashMap;
+import java.util.Map;
 
 
 @Entity
@@ -35,6 +41,7 @@ public class UserEntity {
 
     @Column(name = "GOAL_WEIGHT", nullable = false)
     private int goalW;
+
     @Column(name = "USER_BMR", nullable = false)
     private int bmr;
 
@@ -44,9 +51,10 @@ public class UserEntity {
 
 
 
+
     public UserEntity(String username, String passwort,
                       double weight,double height, int age, double bmi,String category,
-                      int goalW, int bmr, Gender gender) {
+                      int goalW, int bmr, Gender gender ) {
         this.username = username;
         this.passwort = passwort;
         this.weight = weight;
@@ -58,7 +66,11 @@ public class UserEntity {
         this.bmr = calcBmr();
         this.gender= gender;
 
+
     }
+
+
+
 
     protected UserEntity(){
 
@@ -227,5 +239,7 @@ public class UserEntity {
     public void setCategory(String category) {
         this.category = category;
     }
+
+
 
 }

@@ -1,6 +1,9 @@
 package webtech.User;
 
 
+import java.util.HashMap;
+import java.util.Map;
+
 public class User {
 
     private long id;
@@ -14,6 +17,8 @@ public class User {
     private int goalW;
     private int bmr;
     private String gender;
+
+
 
 
     public User(long id, String username, String passwort,

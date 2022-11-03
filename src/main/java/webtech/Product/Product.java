@@ -6,6 +6,7 @@ public class Product {
     private String name;
     private int kcal;
 
+
     public Product(Long id, String name, int kcal) {
         this.id = id;
         this.name = name;
