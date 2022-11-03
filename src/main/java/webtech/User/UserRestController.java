@@ -47,7 +47,7 @@ public class UserRestController {
     }
 
     @DeleteMapping("/v1/users/{id}")
-    public ResponseEntity<Void> deletePerson(@PathVariable Long id){
+    public ResponseEntity<Void> deleteUser(@PathVariable Long id){
         boolean successful = userService.deleteById(id);
         return successful? ResponseEntity.ok().build() : ResponseEntity.notFound().build();
     }
