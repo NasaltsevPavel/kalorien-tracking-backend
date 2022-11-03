@@ -5,13 +5,13 @@ public class Day {
 
     private Long id;
     private String date;
-    private List<Long> productsId;
+    private List<String> productsNames;
     private int TodayKcal;
 
-    public Day(Long id, String date, List<Long> productsId, int todayKcal) {
+    public Day(Long id, String date,List<String> productsNames, int todayKcal) {
         this.id = id;
         this.date = date;
-        this.productsId = productsId;
+        this.productsNames = productsNames;
         TodayKcal = todayKcal;
     }
 
@@ -27,12 +27,12 @@ public class Day {
         this.date = date;
     }
 
-    public List<Long> getProductsId() {
-        return productsId;
+    public List<String> getProductsNames() {
+        return productsNames;
     }
 
-    public void setProductsId(List<Long> productsId) {
-        this.productsId = productsId;
+    public void setProductsNames(List<String> productsNames) {
+        this.productsNames = productsNames;
     }
 
     public int getTodayKcal() {

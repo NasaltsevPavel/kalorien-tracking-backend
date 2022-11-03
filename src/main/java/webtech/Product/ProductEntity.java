@@ -23,7 +23,7 @@ public class ProductEntity {
     private int kcal;
 
     @ManyToMany(mappedBy = "products")
-    private List<DayEntity> userEntityList = new ArrayList<>();
+    private List<DayEntity> dayEntityList = new ArrayList<>();
 
     public ProductEntity(String name, int kcal) {
         this.name = name;
@@ -55,10 +55,10 @@ public class ProductEntity {
     }
 
     public List<DayEntity> getUserEntityList() {
-        return userEntityList;
+        return dayEntityList;
     }
 
     public void setUserEntityList(List<DayEntity> userEntityList) {
-        this.userEntityList = userEntityList;
+        this.dayEntityList = userEntityList;
     }
 }
