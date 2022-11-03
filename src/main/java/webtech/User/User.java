@@ -13,11 +13,12 @@ public class User {
     private String category;
     private int goalW;
     private int bmr;
+    private String gender;
 
 
     public User(long id, String username, String passwort,
                 double weight, double height,
-                int age, int goalW) {
+                int age, int goalW, String gender) {
         this.id = id;
         this.username = username;
         this.passwort = passwort;
@@ -28,6 +29,7 @@ public class User {
         this.category = calcRes();
         this.goalW = goalW;
         this.bmr = calcBmr();
+        this.gender= gender;
 
     }
 
@@ -105,6 +107,7 @@ public class User {
     public double calcBmi() {
 
         bmi = weight /((height/100)*(height/100));
+        bmi = Math.round(bmi);
 
         return bmi;
     }
@@ -165,10 +168,6 @@ public class User {
         this.height = height;
     }
 
-
-    public String getPassword() {
-        return passwort;
-    }
 
     public String getUsername() {
         return username;

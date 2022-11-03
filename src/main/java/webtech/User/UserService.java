@@ -24,9 +24,11 @@ public class UserService {
 
 
     public User create(UserCreateOrUpdateRequest request){
+        var gender = Gender.valueOf(request.getGender());
 
         var UserEntity = new UserEntity(request.getUsername(), request.getPasswort(), request.getWeight(),
-                request.getHeight(), request.getAge(), request.getBmi(), request.getCategory(), request.getGoalW(), request.getBmr());
+                request.getHeight(), request.getAge(), request.getBmi(), request.getCategory(), request.getGoalW(), request.getBmr(),
+                gender);
         UserEntity = userRepository.save(UserEntity);
 
         return transformEntity(UserEntity);
@@ -56,6 +58,7 @@ public class UserService {
         userEntity.setCategory(request.getCategory());
         userEntity.setGoalW(request.getGoalW());
         userEntity.setBmr(request.getBmr());
+        userEntity.setGender(Gender.valueOf(request.getGender()));
         userEntity = userRepository.save(userEntity);
 
         return transformEntity(userEntity);
@@ -64,9 +67,10 @@ public class UserService {
     }
 
     private User transformEntity(UserEntity userEntity){
+        var gender = userEntity.getGender() != null ? userEntity.getGender().name(): Gender.UNKNOWN.name();
         return new User(userEntity.getId(),
                 userEntity.getUsername(), userEntity.getPasswort(), userEntity.getWeight(), userEntity.getHeight(),
-                userEntity.getAge(), userEntity.getGoalW());
+                userEntity.getAge(), userEntity.getGoalW(), gender);
     }
 
     public boolean deleteById(Long id) {

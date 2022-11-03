@@ -12,12 +12,13 @@ public class UserCreateOrUpdateRequest {
     private String category;
     private int goalW;
     private int bmr;
+    private String gender;
 
 
 
     public UserCreateOrUpdateRequest(String username, String passwort, int weight, int height, int age, double bmi,
                                      String category, int goalW
-            , int bmr) {
+            , int bmr, String gender) {
         this.username = username;
         this.passwort = passwort;
         this.weight = weight;
@@ -27,10 +28,18 @@ public class UserCreateOrUpdateRequest {
         this.category = category;
         this.goalW = goalW;
         this.bmr = bmr;
+        this.gender=gender;
 
     }
 
 
+    public String getGender() {
+        return gender;
+    }
+
+    public void setGender(String gender) {
+        this.gender = gender;
+    }
 
     public int getWeight() {
         return weight;
