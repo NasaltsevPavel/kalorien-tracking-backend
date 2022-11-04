@@ -9,7 +9,7 @@ public class Product {
 
     public Product(Long id, String name, int kcal) {
         this.id = id;
-        this.name = name;
+        this.name = "Portion of "+name;
         this.kcal = kcal;
     }
 

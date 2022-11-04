@@ -4,27 +4,28 @@ import java.util.List;
 public class Day {
 
     private Long id;
-    private String date;
+    private String Date;
     private List<String> productsNames;
     private int TodayKcal;
 
-    public Day(Long id, String date,List<String> productsNames, int todayKcal) {
+    public Day(Long id, String Date, List<String> productsNames, int todayKcal) {
         this.id = id;
-        this.date = date;
+        this.Date = Date;
         this.productsNames = productsNames;
-        TodayKcal = todayKcal;
+        this.TodayKcal = todayKcal;
     }
 
     public Long getId() {
         return id;
     }
 
+
     public String getDate() {
-        return date;
+        return Date;
     }
 
     public void setDate(String date) {
-        this.date = date;
+        Date = date;
     }
 
     public List<String> getProductsNames() {

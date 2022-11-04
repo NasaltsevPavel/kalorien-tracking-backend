@@ -16,7 +16,7 @@ public class DayEntity {
     @Column(name = "DAY_DATE", nullable = false)
     private String date;
 
-    @ManyToMany
+    @ManyToMany(fetch = FetchType.EAGER)
     @JoinTable(name = "DAY_PRODUCT",
             joinColumns = @JoinColumn(name = "DAY_ID"),
             inverseJoinColumns = @JoinColumn(name = "PRODUCT_ID"))
@@ -25,8 +25,8 @@ public class DayEntity {
     @Column(name = "DAY_KCAL", nullable = false)
     private int TodayKcal;
 
-    public DayEntity(String date, int todayKcal) {
-        this.date = date;
+    public DayEntity(String day, String month, String year) {
+        this.date = day +"-"+month+"-"+year;
         TodayKcal = calcK();
     }
 
@@ -35,20 +35,31 @@ public class DayEntity {
     }
 
     private int calcK() {
+
         int kcalFromProd = 0;
 
-        for (ProductEntity pr : products) {
-        kcalFromProd = kcalFromProd + pr.getKcal();
-    }
+        if (products==null){
 
-        return kcalFromProd;
+
+            return 0;
+        }
+
+        else {
+
+
+            for (ProductEntity pr : products) {
+                kcalFromProd = kcalFromProd + pr.getKcal();
+            }
+
+            return kcalFromProd;
+
+        }
 
     }
 
     public Long getId() {
         return id;
     }
-
 
     public String getDate() {
         return date;
