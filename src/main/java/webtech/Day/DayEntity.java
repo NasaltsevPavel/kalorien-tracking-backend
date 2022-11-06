@@ -1,9 +1,13 @@
 package webtech.Day;
 
+
+import webtech.Product.Product;
 import webtech.Product.ProductEntity;
 
 import javax.persistence.*;
+import java.util.Iterator;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Entity
 public class DayEntity {
@@ -73,8 +77,27 @@ public class DayEntity {
         return products;
     }
 
-    public void setProductsId(List<ProductEntity> products) {
+    public void setProducts(List<ProductEntity> products) {
         this.products = products;
+    }
+
+    public void addProduct(ProductEntity productEntity){
+        products.add(productEntity);
+    }
+
+    public void deleteProduct(ProductEntity productEntity){
+
+        ProductEntity toRemove = null;
+
+        for (ProductEntity pr : products) {
+
+            if (pr.getName().equals(productEntity.getName())){
+
+                toRemove = pr;
+            }
+        }
+
+        products.remove(toRemove);
     }
 
     public int getTodayKcal() {

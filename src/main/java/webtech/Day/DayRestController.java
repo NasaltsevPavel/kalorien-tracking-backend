@@ -1,10 +1,9 @@
 package webtech.Day;
 
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+import webtech.Product.Product;
+import webtech.Product.ProductCreateOrUpdateRequest;
 
 import java.net.URI;
 import java.net.URISyntaxException;
@@ -33,5 +32,17 @@ public class DayRestController {
         return ResponseEntity.created(uri).build();
 
 
+    }
+
+    @PutMapping("/v1/days/{id}/{name}")
+    public ResponseEntity<Day> addProductToDay(@PathVariable Long id,@PathVariable String name ){
+        var day = dayService.addProduct(id, name);
+        return  day != null? ResponseEntity.ok(day): ResponseEntity.notFound().build();
+    }
+
+    @PutMapping("/v1/days/delete/{id}/{name}")
+    public ResponseEntity<Day> deleteProductToDay(@PathVariable Long id,@PathVariable String name ){
+        var day = dayService.deleteProduct(id, name);
+        return  day != null? ResponseEntity.ok(day): ResponseEntity.notFound().build();
     }
 }

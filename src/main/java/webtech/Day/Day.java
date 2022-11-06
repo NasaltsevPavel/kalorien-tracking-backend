@@ -1,4 +1,6 @@
 package webtech.Day;
+import webtech.Product.ProductEntity;
+
 import java.util.List;
 
 public class Day {
@@ -14,6 +16,7 @@ public class Day {
         this.productsNames = productsNames;
         this.TodayKcal = todayKcal;
     }
+
 
     public Long getId() {
         return id;

@@ -18,6 +18,7 @@ public class ProductService {
     public List<Product> findAll(){
 
         List<ProductEntity> users = productRepository.findAll();
+
         return users.stream().map(this::transformEntity).collect(Collectors.toList());
 
     }

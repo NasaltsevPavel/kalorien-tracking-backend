@@ -2,8 +2,8 @@ package webtech.Day;
 
 import org.springframework.stereotype.Service;
 import webtech.Product.Product;
-import webtech.Product.ProductCreateOrUpdateRequest;
 import webtech.Product.ProductEntity;
+import webtech.Product.ProductRepository;
 
 import java.util.List;
 import java.util.stream.Collectors;
@@ -12,20 +12,25 @@ import java.util.stream.Collectors;
 public class DayService {
 
     private final DayRepository dayRepository;
+    private final ProductRepository productRepository;
 
-    public DayService(DayRepository dayRepository) {
+    public DayService(DayRepository dayRepository, ProductRepository productRepository) {
         this.dayRepository = dayRepository;
+        this.productRepository = productRepository;
     }
 
 
     public List<Day> findAll(){
 
         List<DayEntity> days = dayRepository.findAll();
+
         return days.stream().map(this::transformEntity).collect(Collectors.toList());
 
     }
 
     private Day transformEntity(DayEntity dayEntity){
+
+        int kcalFromProd = 0;
 
 
         if ( dayEntity.getProducts()==null){
@@ -34,7 +39,13 @@ public class DayService {
 
         else {
             var productNames = dayEntity.getProducts().stream().map(ProductEntity::getName).collect(Collectors.toList());
-            return new Day(dayEntity.getId(), dayEntity.getDate(), productNames, dayEntity.getTodayKcal());
+            var productKcal = dayEntity.getProducts().stream().map(ProductEntity::getKcal).collect(Collectors.toList());
+                for (Integer pr : productKcal) {
+                    kcalFromProd = kcalFromProd + pr;
+                }
+                dayEntity.setTodayKcal(kcalFromProd);
+
+            return new Day(dayEntity.getId(), dayEntity.getDate(), productNames, kcalFromProd);
         }
     }
 
@@ -55,23 +66,52 @@ public class DayService {
         return DayEntity.isPresent()? transformEntity(DayEntity.get()) : null;
     }
 
-    //public Day update(Long id, DayCreateOrUpdateRequest request){
+    public Day addProduct(Long id, String name){
 
-       // var dayEntityOptional = dayRepository.findById(id);
-       // if (dayEntityOptional.isEmpty()){
-      //      return null;
-      //  }
+        var dayEntityOptional = dayRepository.findById(id);
+        if (dayEntityOptional.isEmpty()){
+           return null;
+        }
 
-      //  var dayEntity = dayEntityOptional.get();
-       // dayEntity.setDate(request.getDate());
-       // dayEntity.setTodayKcal(request.getTodayKcal());
+        var productEntityOptional = productRepository.findByName(name);
+        if (productEntityOptional.isEmpty()){
+            return null;
+        }
 
-      //  dayEntity = dayRepository.save(dayEntity);
+        var dayEntity = dayEntityOptional.get();
+        var productEntity = productEntityOptional.get();
+         dayEntity.addProduct(productEntity);
 
-      //  return transformEntity(dayEntity);
+        dayEntity = dayRepository.save(dayEntity);
+
+        return transformEntity(dayEntity);
 
 
-    //}
+    }
+
+    public Day deleteProduct(Long id, String name){
+
+        var dayEntityOptional = dayRepository.findById(id);
+        if (dayEntityOptional.isEmpty()){
+            return null;
+        }
+
+        var productEntityOptional = productRepository.findByName(name);
+        if (productEntityOptional.isEmpty()){
+            return null;
+        }
+
+        var dayEntity = dayEntityOptional.get();
+        var productEntity = productEntityOptional.get();
+        dayEntity.deleteProduct(productEntity);
+
+        dayEntity = dayRepository.save(dayEntity);
+
+        return transformEntity(dayEntity);
+
+
+    }
+
 
 
     public boolean deleteById(Long id) {
