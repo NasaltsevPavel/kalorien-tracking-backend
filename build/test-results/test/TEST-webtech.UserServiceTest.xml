@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="webtech.UserServiceTest" tests="1" skipped="0" failures="0" errors="0" timestamp="2022-11-07T17:00:52" hostname="LAPTOP-AOCEN949" time="1.424">
+  <properties/>
+  <testcase name="should return false if person to delete does not exist" classname="webtech.UserServiceTest" time="1.424"/>
+  <system-out><![CDATA[]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>
