@@ -1,4 +1,4 @@
-package webtech;
+package webtech.UserTest;
 
 import org.assertj.core.api.WithAssertions;
 import org.junit.jupiter.api.DisplayName;
