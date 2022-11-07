@@ -10,6 +10,7 @@ import org.mockito.Mockito;
 import org.mockito.junit.jupiter.MockitoExtension;
 import webtech.User.*;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockito.Mockito.doReturn;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.verifyNoMoreInteractions;
@@ -83,4 +84,21 @@ class UserServiceTest implements WithAssertions {
         assertThat(result.getBmr()).isEqualTo(1330);
         assertThat(result.getGender()).isEqualTo("MALE");
     }
+
+    @Test
+    @DisplayName("should create user if all variables are correct")
+    void should_create_user() {
+        // given
+        UserCreateOrUpdateRequest request = new UserCreateOrUpdateRequest("John", "pass123", 80,
+                180, 35, 25.0, "Normal", 75, 1330, "MALE");
+        User expected = new User(111L, "John", "pass123", 80.0, 180.0, 35, 75, "MALE");
+
+        // when
+        User result = underTest.create(request);
+
+        // then
+        assertEquals(expected, result);
+    }
+
+
 }
