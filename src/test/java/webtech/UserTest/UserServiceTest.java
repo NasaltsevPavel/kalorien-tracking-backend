@@ -54,20 +54,17 @@ class UserServiceTest implements WithAssertions {
     }
 
     @Test
-    @DisplayName("should transform PersonEntity to Person")
-    void should_transform_person_entity_to_person() {
+    @DisplayName("should transform UserEntity to User")
+    void should_transform_user_entity_to_user() {
         // given
         var userEntity = Mockito.mock(UserEntity.class);
         doReturn(111L).when(userEntity).getId();
         doReturn("John").when(userEntity).getUsername();
         doReturn("pass123").when(userEntity).getPasswort();
-        doReturn(80).when(userEntity).getWeight();
-        doReturn(180).when(userEntity).getHeight();
+        doReturn(80.0).when(userEntity).getWeight();
+        doReturn(180.0).when(userEntity).getHeight();
         doReturn(35).when(userEntity).getAge();
-        doReturn(25).when(userEntity).getBmi();
-        doReturn("Normal").when(userEntity).getCategory();
         doReturn(75).when(userEntity).getGoalW();
-        doReturn(2330).when(userEntity).getBmr();
         doReturn(Gender.MALE).when(userEntity).getGender();
 
         // when
@@ -77,13 +74,13 @@ class UserServiceTest implements WithAssertions {
         assertThat(result.getId()).isEqualTo(111);
         assertThat(result.getUsername()).isEqualTo("John");
         assertThat(result.getPasswort()).isEqualTo("pass123");
-        assertThat(result.getWeight()).isEqualTo(80);
-        assertThat(result.getHeight()).isEqualTo(180);
+        assertThat(result.getWeight()).isEqualTo(80.0);
+        assertThat(result.getHeight()).isEqualTo(180.0);
         assertThat(result.getAge()).isEqualTo(35);
-        assertThat(result.getBmi()).isEqualTo(25);
+        assertThat(result.getBmi()).isEqualTo(25.0);
         assertThat(result.getCategory()).isEqualTo("Normal");
         assertThat(result.getGoalW()).isEqualTo(75);
-        assertThat(result.getBmr()).isEqualTo(2330);
+        assertThat(result.getBmr()).isEqualTo(1330);
         assertThat(result.getGender()).isEqualTo("MALE");
     }
 }
