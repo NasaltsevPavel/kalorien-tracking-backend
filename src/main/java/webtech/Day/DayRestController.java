@@ -40,7 +40,7 @@ public class DayRestController {
         return  day != null? ResponseEntity.ok(day): ResponseEntity.notFound().build();
     }
 
-    @PutMapping("/v1/days/delete/{id}/{name}")
+    @DeleteMapping("/v1/days/{id}/{name}")
     public ResponseEntity<Day> deleteProductToDay(@PathVariable Long id,@PathVariable String name ){
         var day = dayService.deleteProduct(id, name);
         return  day != null? ResponseEntity.ok(day): ResponseEntity.notFound().build();
