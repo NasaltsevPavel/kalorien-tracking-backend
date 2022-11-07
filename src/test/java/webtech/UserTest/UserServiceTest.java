@@ -100,5 +100,18 @@ class UserServiceTest implements WithAssertions {
         assertEquals(expected, result);
     }
 
+    @Test
+    @DisplayName("should create user with unknown gender if it is null")
+    void should_create_user_with_unknown_gender() {
+        // given
+        UserCreateOrUpdateRequest request = new UserCreateOrUpdateRequest("John", "pass123", 80,
+                180, 35, 25.0, "Normal", 75, 1330, null);
+        User expected = new User(111L, "John", "pass123", 80.0, 180.0, 35, 75, null);
 
+        // when
+        User result = underTest.create(request);
+
+        // then
+        assertEquals(expected, result);
+    }
 }

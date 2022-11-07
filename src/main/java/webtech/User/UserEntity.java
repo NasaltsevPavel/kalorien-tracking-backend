@@ -101,36 +101,36 @@ public class UserEntity {
 
         }
 
-        if (this.bmi > 16 && this.bmi < 17) {
+        if (this.bmi >= 16 && this.bmi < 17) {
 
             category = "Moderate Thinnes";
 
         }
-        if (this.bmi > 17 && this.bmi < 18.5) {
+        if (this.bmi > 17 && this.bmi <= 18.5) {
 
             category = "Mild Thinness";
 
         }
 
-        if (this.bmi > 18.5 && this.bmi < 25) {
+        if (this.bmi > 18.5 && this.bmi <= 25) {
 
             category = "Normal";
 
         }
 
-        if (this.bmi > 25 && this.bmi < 30) {
+        if (this.bmi > 25 && this.bmi <= 30) {
 
             category = "Overweight";
 
         }
 
-        if (this.bmi > 30 && this.bmi < 35) {
+        if (this.bmi > 30 && this.bmi <= 35) {
 
             category = "Obese Class I";
 
         }
 
-        if (this.bmi > 35 && this.bmi < 40) {
+        if (this.bmi > 35 && this.bmi <= 40) {
 
             category = "Obese Class II";
 
