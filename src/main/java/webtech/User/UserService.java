@@ -67,7 +67,7 @@ public class UserService {
 
     }
 
-    private User transformEntity(UserEntity userEntity){
+    public User transformEntity(UserEntity userEntity){
         var gender = userEntity.getGender() != null ? userEntity.getGender().name(): Gender.UNKNOWN.name();
         return new User(userEntity.getId(),
                 userEntity.getUsername(), userEntity.getPasswort(), userEntity.getWeight(), userEntity.getHeight(),
