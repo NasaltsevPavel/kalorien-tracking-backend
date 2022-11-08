@@ -95,13 +95,13 @@ public class UserEntity {
 
     private String calcRes() {
 
-        if (this.bmi < 16) {
+        if (this.bmi <= 16) {
 
             category = "Severe Thinness";
 
         }
 
-        if (this.bmi >= 16 && this.bmi < 17) {
+        if (this.bmi > 16 && this.bmi <= 17) {
 
             category = "Moderate Thinnes";
 

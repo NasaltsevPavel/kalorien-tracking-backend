@@ -42,4 +42,56 @@ public class UserTest {
         // then
         assertEquals(2039, result);
     }
+
+    @Test
+    @DisplayName("should calculate category when bmi is on the border of two categories")
+    void should_calculate_category_when_bmi_on_border(){
+        // given
+        User user = new User(111L, "John", "pass123", 80.0, 180.0, 35, 75, "MALE");
+
+        // when
+        String result = user.getCategory();
+
+        // then
+        assertEquals("Normal", result);
+    }
+
+    @Test
+    @DisplayName("should calculate category when bmi is in the borders of category")
+    void should_calculate_category_when_bmi_in_borders(){
+        // given
+        User user = new User(222L, "Maria", "456pass", 53.0, 170.0, 30, 65, "FEMALE");
+
+        // when
+        String result = user.getCategory();
+
+        // then
+        assertEquals("Mild Thinness", result);
+    }
+
+    @Test
+    @DisplayName("should calculate bmi when the result should be rounded down")
+    void should_calc_bmi_when_rounded_down(){
+        // given
+        User user = new User(222L, "Maria", "456pass", 53.0, 170.0, 30, 65, "FEMALE");
+
+        // when
+        double result = user.getBmi();
+
+        // then
+        assertEquals(18.0, result);
+    }
+
+    @Test
+    @DisplayName("should calculate bmi when the result should be rounded up")
+    void should_calc_bmi_when_rounded_up(){
+        // given
+        User user = new User(111L, "John", "pass123", 80.0, 180.0, 35, 75, "MALE");
+
+        // when
+        double result = user.getBmi();
+
+        // then
+        assertEquals(25.0, result);
+    }
 }

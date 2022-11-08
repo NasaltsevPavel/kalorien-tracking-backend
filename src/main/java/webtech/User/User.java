@@ -56,18 +56,18 @@ public class User {
 
     private String calcRes() {
 
-        if (this.bmi < 16) {
+        if (this.bmi <= 16.0) {
 
             category = "Severe Thinness";
 
         }
 
-        if (this.bmi >= 16 && this.bmi < 17) {
+        if (this.bmi > 16.0 && this.bmi <= 17.0) {
 
             category = "Moderate Thinnes";
 
         }
-        if (this.bmi > 17 && this.bmi <= 18.5) {
+        if (this.bmi > 17.0 && this.bmi <= 18.5) {
 
             category = "Mild Thinness";
 
