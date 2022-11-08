@@ -24,8 +24,13 @@ public class UserService {
 
 
     public User create(UserCreateOrUpdateRequest request){
-        var gender = Gender.valueOf(request.getGender());
+        if (request.getGender() == null){
 
+            request.setGender("UNKNOWN");
+
+        }
+
+            var gender = Gender.valueOf(request.getGender());
 
         var UserEntity = new UserEntity(request.getUsername(), request.getPasswort(), request.getWeight(),
                 request.getHeight(), request.getAge(), request.getBmi(), request.getCategory(), request.getGoalW(), request.getBmr(),

@@ -1,13 +1,11 @@
 package webtech.Day;
 
 
-import webtech.Product.Product;
-import webtech.Product.ProductEntity;
 
+import webtech.Product.ProductEntity;
 import javax.persistence.*;
-import java.util.Iterator;
 import java.util.List;
-import java.util.stream.Collectors;
+
 
 @Entity
 public class DayEntity {

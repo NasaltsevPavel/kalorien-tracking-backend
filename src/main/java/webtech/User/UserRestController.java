@@ -28,7 +28,7 @@ public class UserRestController {
 
         var user = userService.create(request);
         URI uri = new URI("/user/v1/users/"+ user.getId());
-        return ResponseEntity.created(uri).build();
+        return ResponseEntity.created(uri).header("Access-Control-Expose-Headers", "Location").build();
 
 
     }

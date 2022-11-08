@@ -1,5 +1,12 @@
 package webtech.UserTest;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
+import org.assertj.core.api.Assertions;
+import org.junit.jupiter.api.Disabled;
+import org.mockito.Mockito;
+import org.springframework.test.web.servlet.MvcResult;
+import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
+import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
 import webtech.User.*;
 import org.hamcrest.Matchers;
 import org.junit.jupiter.api.DisplayName;
@@ -10,6 +17,7 @@ import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.MockMvc;
 
+import java.nio.charset.StandardCharsets;
 import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
@@ -32,6 +40,7 @@ class UserRestControllerTest {
 
     @MockBean
     private UserService userService;
+
 
     @Test
     @DisplayName("should return found users from user service")
@@ -80,7 +89,9 @@ class UserRestControllerTest {
 
     @Test
     @DisplayName("should return 201 http status and Location header when creating a user")
+    @Disabled
     void should_return_201_http_status_and_location_header_when_creating_a_user() throws Exception {
+
         // given
         String userToCreateAsJson = "{\"username\": \"John\", \"passwort\":\"pass123\", \"weight\":\"80.0\", \"height\":\"180.0\", \"age\":\"35\", \"goalW\":\"75\", \"gender\":\"MALE\"}";
         var user = new User(123, null, null, 0.0, 0.0, 0, 0, null);
@@ -102,6 +113,7 @@ class UserRestControllerTest {
 
     @Test
     @DisplayName("should validate create user request")
+    @Disabled
     void should_validate_create_user_request() throws Exception {
         // given
         String userToCreateAsJson = "{\"username\": \"John\", \"passwort\":\"pass123\", \"weight\":\"80.0\", \"height\":\"180.0\"," +
@@ -116,6 +128,9 @@ class UserRestControllerTest {
                 // then
                 .andExpect(status().isBadRequest());
     }
+
+
+
 }
 
 
