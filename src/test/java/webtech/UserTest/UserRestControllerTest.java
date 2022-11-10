@@ -47,8 +47,8 @@ class UserRestControllerTest {
     void should_return_found_users_from_user_service() throws Exception {
         // given
         var users = List.of(
-                new User(111L, "John", "pass123", 80.0, 180.0, 35, 75, "MALE"),
-                new User(222L, "Maria", "456pass", 60.0, 170.0, 30, 65, "FEMALE")
+                new User(111L, "John", "pass123", 80.0, 180.0, 35, 75, "MALE", null),
+                new User(222L, "Maria", "456pass", 60.0, 170.0, 30, 65, "FEMALE", null)
         );
         doReturn(users).when(userService).findAll();
 
@@ -94,7 +94,7 @@ class UserRestControllerTest {
 
         // given
         String userToCreateAsJson = "{\"username\": \"John\", \"passwort\":\"pass123\", \"weight\":\"80.0\", \"height\":\"180.0\", \"age\":\"35\", \"goalW\":\"75\", \"gender\":\"MALE\"}";
-        var user = new User(123, null, null, 0.0, 0.0, 0, 0, null);
+        var user = new User(123, null, null, 0.0, 0.0, 0, 0, null, null);
         doReturn(user).when(userService).create(any());
 
         // when

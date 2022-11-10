@@ -1,5 +1,7 @@
 package webtech.Day;
 
+import webtech.User.User;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -12,12 +14,14 @@ public class DayCreateOrUpdateRequest {
     private String year;
     private List<String> productsNames = new ArrayList<>();
     private int TodayKcal ;
+    private Long userId;
 
-    public DayCreateOrUpdateRequest(String day, String month, String year) {
+    public DayCreateOrUpdateRequest(String day, String month, String year, Long userId) {
 
         this.day = day;
         this.month = month;
         this.year = year;
+        this.userId = userId;
 
     }
 
@@ -60,5 +64,13 @@ public class DayCreateOrUpdateRequest {
 
     public void setTodayKcal(int todayKcal) {
         TodayKcal = todayKcal;
+    }
+
+    public Long getUserId() {
+        return userId;
+    }
+
+    public void setUserId(Long userId) {
+        this.userId = userId;
     }
 }

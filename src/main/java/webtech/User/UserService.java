@@ -1,6 +1,7 @@
 package webtech.User;
 
 import org.springframework.stereotype.Service;
+import webtech.Day.DayEntity;
 
 import java.util.List;
 import java.util.stream.Collectors;
@@ -74,9 +75,10 @@ public class UserService {
 
     public User transformEntity(UserEntity userEntity){
         var gender = userEntity.getGender() != null ? userEntity.getGender().name(): Gender.UNKNOWN.name();
+        var dayIds = userEntity.getDays().stream().map(DayEntity::getId).collect(Collectors.toList());
         return new User(userEntity.getId(),
                 userEntity.getUsername(), userEntity.getPasswort(), userEntity.getWeight(), userEntity.getHeight(),
-                userEntity.getAge(), userEntity.getGoalW(), gender);
+                userEntity.getAge(), userEntity.getGoalW(), gender, dayIds);
     }
 
     public boolean deleteById(Long id) {

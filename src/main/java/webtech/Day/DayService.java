@@ -1,9 +1,11 @@
 package webtech.Day;
 
 import org.springframework.stereotype.Service;
-import webtech.Product.Product;
 import webtech.Product.ProductEntity;
 import webtech.Product.ProductRepository;
+import webtech.User.User;
+import webtech.User.UserRepository;
+import webtech.User.UserService;
 
 import java.util.List;
 import java.util.stream.Collectors;
@@ -13,10 +15,14 @@ public class DayService {
 
     private final DayRepository dayRepository;
     private final ProductRepository productRepository;
+    private final UserRepository userRepository;
 
-    public DayService(DayRepository dayRepository, ProductRepository productRepository) {
+    private UserService service;
+
+    public DayService(DayRepository dayRepository, ProductRepository productRepository, UserRepository userRepository) {
         this.dayRepository = dayRepository;
         this.productRepository = productRepository;
+        this.userRepository = userRepository;
     }
 
 
@@ -31,11 +37,11 @@ public class DayService {
     private Day transformEntity(DayEntity dayEntity){
 
         int kcalFromProd = 0;
-
+        User user = service.transformEntity(dayEntity.getUser());
 
         if ( dayEntity.getProducts()==null){
-
-        return new Day(dayEntity.getId(), dayEntity.getDate(), null, dayEntity.getTodayKcal());}
+            return new Day(dayEntity.getId(), dayEntity.getDate(), null, dayEntity.getTodayKcal(), user);
+        }
 
         else {
             var productNames = dayEntity.getProducts().stream().map(ProductEntity::getName).collect(Collectors.toList());
@@ -44,15 +50,14 @@ public class DayService {
                     kcalFromProd = kcalFromProd + pr;
                 }
                 dayEntity.setTodayKcal(kcalFromProd);
-
-            return new Day(dayEntity.getId(), dayEntity.getDate(), productNames, kcalFromProd);
+            return new Day(dayEntity.getId(), dayEntity.getDate(), productNames, kcalFromProd, user);
         }
     }
 
 
     public Day create(DayCreateOrUpdateRequest request){
-
-        var DayEntity = new DayEntity(request.getDay(),request.getMonth(),request.getYear());
+        var user = userRepository.findById(request.getUserId()).orElseThrow();
+        var DayEntity = new DayEntity(request.getDay(),request.getMonth(),request.getYear(), user);
 
         DayEntity = dayRepository.save(DayEntity);
 

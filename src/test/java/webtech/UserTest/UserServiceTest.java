@@ -93,7 +93,7 @@ class UserServiceTest implements WithAssertions {
         // given
         UserCreateOrUpdateRequest request = new UserCreateOrUpdateRequest("John", "pass123", 80,
                 180, 35, 25.0, "Normal", 75, 1330, "MALE");
-        User expected = new User(111L, "John", "pass123", 80.0, 180.0, 35, 75, "MALE");
+        User expected = new User(111L, "John", "pass123", 80.0, 180.0, 35, 75, "MALE", null);
 
         // when
         User result = underTest.create(request);
@@ -109,7 +109,7 @@ class UserServiceTest implements WithAssertions {
         // given
         UserCreateOrUpdateRequest request = new UserCreateOrUpdateRequest("John", "pass123", 80,
                 180, 35, 25.0, "Normal", 75, 1330, null);
-        User expected = new User(111L, "John", "pass123", 80.0, 180.0, 35, 75, null);
+        User expected = new User(111L, "John", "pass123", 80.0, 180.0, 35, 75, null, null);
 
         // when
         User result = underTest.create(request);
