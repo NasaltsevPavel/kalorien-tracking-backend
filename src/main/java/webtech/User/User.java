@@ -2,6 +2,7 @@ package webtech.User;
 
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 public class User {
@@ -17,12 +18,13 @@ public class User {
     private int goalW;
     private int bmr;
     private String gender;
+    private List<Long> days;
 
 
 
     public User(long id, String username, String passwort,
                 double weight, double height,
-                int age, int goalW, String gender) {
+                int age, int goalW, String gender, List<Long> days) {
         this.id = id;
         this.username = username;
         this.passwort = passwort;
@@ -34,6 +36,7 @@ public class User {
         this.goalW = goalW;
         this.bmr = calcBmr();
         this.gender= gender;
+        this.days = days;
 
     }
 
@@ -203,5 +206,11 @@ public class User {
         return gender;
     }
 
+    public List<Long> getDays() {
+        return days;
+    }
 
+    public void setDays(List<Long> days) {
+        this.days = days;
+    }
 }

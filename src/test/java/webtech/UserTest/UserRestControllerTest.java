@@ -113,7 +113,6 @@ class UserRestControllerTest {
 
     @Test
     @DisplayName("should validate create user request")
-    @Disabled
     void should_validate_create_user_request() throws Exception {
         // given
         String userToCreateAsJson = "{\"username\": \"John\", \"passwort\":\"pass123\", \"weight\":\"80.0\", \"height\":\"180.0\"," +

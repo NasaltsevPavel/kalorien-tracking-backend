@@ -3,6 +3,8 @@ package webtech.Day;
 
 
 import webtech.Product.ProductEntity;
+import webtech.User.UserEntity;
+
 import javax.persistence.*;
 import java.util.List;
 
@@ -27,9 +29,14 @@ public class DayEntity {
     @Column(name = "DAY_KCAL", nullable = false)
     private int TodayKcal;
 
-    public DayEntity(String day, String month, String year) {
+    @ManyToOne(cascade = CascadeType.MERGE)
+    @JoinColumn(name = "USER_ID", referencedColumnName = "USER_ID")
+    private UserEntity user;
+
+    public DayEntity(String day, String month, String year, UserEntity user) {
         this.date = day +"-"+month+"-"+year;
         TodayKcal = calcK();
+        this.user = user;
     }
 
     protected DayEntity() {
@@ -104,5 +111,13 @@ public class DayEntity {
 
     public void setTodayKcal(int todayKcal) {
         TodayKcal = todayKcal;
+    }
+
+    public UserEntity getUser() {
+        return user;
+    }
+
+    public void setUser(UserEntity user) {
+        this.user = user;
     }
 }

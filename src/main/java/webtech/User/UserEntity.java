@@ -1,12 +1,15 @@
 package webtech.User;
 
 
+import webtech.Day.DayEntity;
 import webtech.Product.Product;
 import webtech.Product.ProductEntity;
 
 import javax.persistence.*;
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 
@@ -49,8 +52,8 @@ public class UserEntity {
     @Enumerated(value = EnumType.STRING)
     private Gender gender;
 
-
-
+    @OneToMany(mappedBy = "user", fetch = FetchType.EAGER)
+    private List<DayEntity> days = new ArrayList<>();
 
     public UserEntity(String username, String passwort,
                       double weight,double height, int age, double bmi,String category,
@@ -240,6 +243,11 @@ public class UserEntity {
         this.category = category;
     }
 
+    public List<DayEntity> getDays() {
+        return days;
+    }
 
-
+    public void setDays(List<DayEntity> days) {
+        this.days = days;
+    }
 }

@@ -1,5 +1,6 @@
 package webtech.Day;
 import webtech.Product.ProductEntity;
+import webtech.User.User;
 
 import java.util.List;
 
@@ -9,12 +10,14 @@ public class Day {
     private String Date;
     private List<String> productsNames;
     private int TodayKcal;
+    private User user;
 
-    public Day(Long id, String Date, List<String> productsNames, int todayKcal) {
+    public Day(Long id, String Date, List<String> productsNames, int todayKcal, User user) {
         this.id = id;
         this.Date = Date;
         this.productsNames = productsNames;
         this.TodayKcal = todayKcal;
+        this.user = user;
     }
 
 
@@ -45,5 +48,13 @@ public class Day {
 
     public void setTodayKcal(int todayKcal) {
         TodayKcal = todayKcal;
+    }
+
+    public User getUser() {
+        return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
     }
 }
