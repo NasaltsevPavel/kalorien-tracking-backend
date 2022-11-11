@@ -159,6 +159,25 @@ public class UserEntity {
         return bmi;
     }
 
+    public void addDay(DayEntity dayEntity){
+        days.add(dayEntity);
+    }
+
+    public void deleteDay(DayEntity dayEntity){
+
+        DayEntity toRemove = null;
+
+        for (DayEntity day : days) {
+
+            if (day.getDate().equals(dayEntity.getDate())){
+
+                toRemove = day;
+            }
+        }
+
+        days.remove(toRemove);
+    }
+
     public Gender getGender() {
         return gender;
     }

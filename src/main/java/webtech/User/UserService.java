@@ -1,7 +1,9 @@
 package webtech.User;
 
 import org.springframework.stereotype.Service;
+import webtech.Day.Day;
 import webtech.Day.DayEntity;
+import webtech.Day.DayRepository;
 
 import java.util.List;
 import java.util.stream.Collectors;
@@ -11,9 +13,11 @@ public class UserService {
 
 
     private final UserRepository userRepository;
+    private final DayRepository dayRepository;
 
-    public UserService(UserRepository userRepository) {
+    public UserService(UserRepository userRepository, DayRepository dayRepository) {
         this.userRepository = userRepository;
+        this.dayRepository = dayRepository;
     }
 
     public List<User> findAll(){
@@ -90,5 +94,49 @@ public class UserService {
         return true;
     }
 
+    public User addDay(Long id, String date){
 
+        var userEntityOptional = userRepository.findById(id);
+        if (userEntityOptional.isEmpty()){
+            return null;
+        }
+
+        var dayEntityOptional = dayRepository.findByDate(date);
+        if (dayEntityOptional.isEmpty()){
+            return null;
+        }
+
+        var userEntity = userEntityOptional.get();
+        var dayEntity = dayEntityOptional.get();
+        userEntity.addDay(dayEntity);
+
+        userEntity = userRepository.save(userEntity);
+
+        return transformEntity(userEntity);
+
+
+    }
+
+    public User deleteDay(Long id, String date){
+
+        var userEntityOptional = userRepository.findById(id);
+        if (userEntityOptional.isEmpty()){
+            return null;
+        }
+
+        var dayEntityOptional = dayRepository.findByDate(date);
+        if (dayEntityOptional.isEmpty()){
+            return null;
+        }
+
+        var userEntity = userEntityOptional.get();
+        var dayEntity = dayEntityOptional.get();
+        userEntity.deleteDay(dayEntity);
+
+        userEntity = userRepository.save(userEntity);
+
+        return transformEntity(userEntity);
+
+
+    }
 }
