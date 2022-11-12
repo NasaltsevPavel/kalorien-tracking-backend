@@ -1,9 +1,6 @@
 package webtech.Day;
-
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import webtech.Product.Product;
-import webtech.Product.ProductCreateOrUpdateRequest;
 
 import java.net.URI;
 import java.net.URISyntaxException;

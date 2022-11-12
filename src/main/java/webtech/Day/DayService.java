@@ -17,12 +17,13 @@ public class DayService {
     private final ProductRepository productRepository;
     private final UserRepository userRepository;
 
-    private UserService service;
+    private final UserService userService;
 
-    public DayService(DayRepository dayRepository, ProductRepository productRepository, UserRepository userRepository) {
+    public DayService(DayRepository dayRepository, ProductRepository productRepository, UserRepository userRepository, UserService userService) {
         this.dayRepository = dayRepository;
         this.productRepository = productRepository;
         this.userRepository = userRepository;
+        this.userService = userService;
     }
 
 
@@ -37,10 +38,10 @@ public class DayService {
     private Day transformEntity(DayEntity dayEntity){
 
         int kcalFromProd = 0;
-        User user = service.transformEntity(dayEntity.getUser());
+        User user = userService.transformEntity(dayEntity.getUser());
 
         if ( dayEntity.getProducts()==null){
-            return new Day(dayEntity.getId(), dayEntity.getDate(), null, dayEntity.getTodayKcal(), user);
+            return new Day(dayEntity.getId(), dayEntity.getDate(), null, dayEntity.getTodayKcal(), user, dayEntity.getSeason().name());
         }
 
         else {
@@ -50,14 +51,16 @@ public class DayService {
                     kcalFromProd = kcalFromProd + pr;
                 }
                 dayEntity.setTodayKcal(kcalFromProd);
-            return new Day(dayEntity.getId(), dayEntity.getDate(), productNames, kcalFromProd, user);
+            return new Day(dayEntity.getId(), dayEntity.getDate(), productNames, kcalFromProd, user,dayEntity.getSeason().name());
         }
     }
 
 
     public Day create(DayCreateOrUpdateRequest request){
+
         var user = userRepository.findById(request.getUserId()).orElseThrow();
-        var DayEntity = new DayEntity(request.getDay(),request.getMonth(),request.getYear(), user);
+        var season = DaySeason.valueOf(request.getSeason());
+        var DayEntity = new DayEntity(request.getDay(),request.getMonth(),request.getYear(), user, season);
 
         DayEntity = dayRepository.save(DayEntity);
 

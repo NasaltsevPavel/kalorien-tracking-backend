@@ -28,7 +28,7 @@ public class UserRestController {
     public ResponseEntity<Void> createUser(@RequestBody UserCreateOrUpdateRequest request) throws URISyntaxException {
 
         var user = userService.create(request);
-        URI uri = new URI("/user/v1/users/"+ user.getId());
+        URI uri = new URI("/v1/users/"+ user.getId());
         return ResponseEntity.created(uri).header("Access-Control-Expose-Headers", "Location").build();
 
 

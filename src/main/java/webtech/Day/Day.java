@@ -11,13 +11,15 @@ public class Day {
     private List<String> productsNames;
     private int TodayKcal;
     private User user;
+    private String season;
 
-    public Day(Long id, String Date, List<String> productsNames, int todayKcal, User user) {
+    public Day(Long id, String Date, List<String> productsNames, int todayKcal, User user, String season) {
         this.id = id;
         this.Date = Date;
         this.productsNames = productsNames;
         this.TodayKcal = todayKcal;
         this.user = user;
+        this.season=season;
     }
 
 
@@ -56,5 +58,13 @@ public class Day {
 
     public void setUser(User user) {
         this.user = user;
+    }
+
+    public String getSeason() {
+        return season;
+    }
+
+    public void setSeason(String season) {
+        this.season = season;
     }
 }

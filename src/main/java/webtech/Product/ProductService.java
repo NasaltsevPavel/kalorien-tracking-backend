@@ -1,6 +1,7 @@
 package webtech.Product;
 
 import org.springframework.stereotype.Service;
+import webtech.Day.DaySeason;
 
 import java.util.List;
 import java.util.stream.Collectors;
@@ -25,12 +26,20 @@ public class ProductService {
 
     private Product transformEntity(ProductEntity productEntity){
 
-        return new Product(productEntity.getId(), productEntity.getName(), productEntity.getKcal());
+        return new Product(productEntity.getId(), productEntity.getName(), productEntity.getKcal(), productEntity.getType().name());
     }
 
     public Product create(ProductCreateOrUpdateRequest request){
 
-        var ProductEntity = new ProductEntity(request.getName(), request.getKcal());
+        if (request.getType() == null){
+
+            request.setType("UNKNOWN");
+
+        }
+
+        var type = ProductType.valueOf(request.getType());
+
+        var ProductEntity = new ProductEntity(request.getName(), request.getKcal(), type);
 
         ProductEntity = productRepository.save(ProductEntity);
 
