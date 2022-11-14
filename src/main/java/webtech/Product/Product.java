@@ -5,12 +5,14 @@ public class Product {
     private Long id;
     private String name;
     private int kcal;
+    private String type;
 
 
-    public Product(Long id, String name, int kcal) {
+    public Product(Long id, String name, int kcal, String type) {
         this.id = id;
         this.name = "Portion of "+name;
         this.kcal = kcal;
+        this.type=type;
     }
 
     public Long getId() {
@@ -35,5 +37,13 @@ public class Product {
 
     public void setKcal(int kcal) {
         this.kcal = kcal;
+    }
+
+    public String getType() {
+        return type;
+    }
+
+    public void setType(String type) {
+        this.type = type;
     }
 }

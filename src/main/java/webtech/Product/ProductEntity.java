@@ -2,6 +2,7 @@ package webtech.Product;
 
 
 import webtech.Day.DayEntity;
+import webtech.Day.DaySeason;
 
 import javax.persistence.*;
 import java.util.ArrayList;
@@ -25,9 +26,14 @@ public class ProductEntity {
     @ManyToMany(mappedBy = "products")
     private List<DayEntity> dayEntityList = new ArrayList<>();
 
-    public ProductEntity(String name, int kcal) {
+    @Column(name = "PRODUCT_TYPE")
+    @Enumerated(value = EnumType.STRING)
+    private ProductType type;
+
+    public ProductEntity(String name, int kcal, ProductType type) {
         this.name = name;
         this.kcal = kcal;
+        this.type=type;
     }
 
     protected ProductEntity() {
@@ -52,6 +58,14 @@ public class ProductEntity {
 
     public void setKcal(int kcal) {
         this.kcal = kcal;
+    }
+
+    public ProductType getType() {
+        return type;
+    }
+
+    public void setType(ProductType type) {
+        this.type = type;
     }
 
     public List<DayEntity> getUserEntityList() {

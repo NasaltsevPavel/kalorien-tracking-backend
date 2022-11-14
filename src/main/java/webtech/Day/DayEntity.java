@@ -33,10 +33,21 @@ public class DayEntity {
     @JoinColumn(name = "USER_ID", referencedColumnName = "USER_ID")
     private UserEntity user;
 
-    public DayEntity(String day, String month, String year, UserEntity user) {
-        this.date = day +"-"+month+"-"+year;
+    @Column(name = "DAY_SEASON")
+    @Enumerated(value = EnumType.STRING)
+    private DaySeason season;
+
+    public DayEntity(int day, int month, int year, UserEntity user, DaySeason season) {
+        if(month <= 9 ){
+
+            this.date = day +"-"+"0"+month+"-"+year;
+        }
+        else {
+            this.date = day +"-"+month+"-"+year;
+        }
         TodayKcal = calcK();
         this.user = user;
+        this.season=season;
     }
 
     protected DayEntity() {
@@ -119,5 +130,13 @@ public class DayEntity {
 
     public void setUser(UserEntity user) {
         this.user = user;
+    }
+
+    public DaySeason getSeason() {
+        return season;
+    }
+
+    public void setSeason(DaySeason season) {
+        this.season = season;
     }
 }
