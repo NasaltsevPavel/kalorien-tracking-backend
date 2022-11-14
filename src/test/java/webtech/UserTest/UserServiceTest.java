@@ -5,6 +5,7 @@ import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
+import org.mockito.ArgumentCaptor;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.Mockito;
@@ -12,6 +13,7 @@ import org.mockito.junit.jupiter.MockitoExtension;
 import webtech.User.*;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.doReturn;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.verifyNoMoreInteractions;
@@ -88,18 +90,45 @@ class UserServiceTest implements WithAssertions {
 
     @Test
     @DisplayName("should create user if all variables are correct")
-    @Disabled
+    //@Disabled
     void should_create_user() {
         // given
         UserCreateOrUpdateRequest request = new UserCreateOrUpdateRequest("John", "pass123", 80,
                 180, 35, 25.0, "Normal", 75, 1330, "MALE");
-        User expected = new User(111L, "John", "pass123", 80.0, 180.0, 35, 75, "MALE", null);
+        UserEntity expected = new UserEntity( "John", "pass123", 80.0, 180.0, 35, 75, "normal", 75, 25, Gender.MALE);
+        doReturn(expected).when(repository).save(any());
+
 
         // when
-        User result = underTest.create(request);
+        User actual = underTest.create(request);
+        //actual.setId(expected.getId());
+        //boolean result = underTest.createdCheck(111L);
 
         // then
-        assertEquals(expected, result);
+        assertEquals(expected.getAge(), actual.getAge());
+        //assertThat(result).isTrue();
+    }
+
+    @Test
+    @DisplayName("should create user if all variables are correct")
+        //@Disabled
+    void should_create_user2() {
+        // given
+        UserCreateOrUpdateRequest request = new UserCreateOrUpdateRequest("John", "pass123", 80,
+                180, 35, 25.0, "Normal", 75, 1330, "MALE");
+        UserEntity expected = new UserEntity( "John", "pass123", 80.0, 180.0, 35, 75, "normal", 75, 25, Gender.MALE);
+        doReturn(expected).when(repository).save(any());
+
+
+        // when
+        User actual = underTest.create(request);
+        //actual.setId(expected.getId());
+        //boolean result = underTest.createdCheck(111L);
+
+        // then
+        ArgumentCaptor<UserEntity> captor = ArgumentCaptor.forClass(UserEntity.class);
+        verify(repository).save(captor.capture());
+        assertEquals(request.getAge(), captor.getValue().getAge());
     }
 
     @Test

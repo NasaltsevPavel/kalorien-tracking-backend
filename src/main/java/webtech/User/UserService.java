@@ -43,8 +43,6 @@ public class UserService {
         UserEntity = userRepository.save(UserEntity);
 
         return transformEntity(UserEntity);
-
-
     }
 
     public User findById(Long id){
@@ -138,5 +136,13 @@ public class UserService {
         return transformEntity(userEntity);
 
 
+    }
+
+    public boolean createdCheck(Long id) {
+        if(!userRepository.existsById(id)){
+            return false;
+        }
+
+        return true;
     }
 }
