@@ -13,6 +13,8 @@ public class ProductCreateOrUpdateRequest {
         this.type = type;
     }
 
+    public ProductCreateOrUpdateRequest() {}
+
     public String getName() {
         return name;
     }

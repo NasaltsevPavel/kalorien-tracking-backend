@@ -3,9 +3,7 @@ package webtech.Day;
 import org.springframework.stereotype.Service;
 import webtech.Product.ProductEntity;
 import webtech.Product.ProductRepository;
-import webtech.User.User;
 import webtech.User.UserRepository;
-import webtech.User.UserService;
 
 import java.util.List;
 import java.util.stream.Collectors;
@@ -17,15 +15,11 @@ public class DayService {
     private final ProductRepository productRepository;
     private final UserRepository userRepository;
 
-    private final UserService userService;
-
-    public DayService(DayRepository dayRepository, ProductRepository productRepository, UserRepository userRepository, UserService userService) {
+    public DayService(DayRepository dayRepository, ProductRepository productRepository, UserRepository userRepository) {
         this.dayRepository = dayRepository;
         this.productRepository = productRepository;
         this.userRepository = userRepository;
-        this.userService = userService;
     }
-
 
     public List<Day> findAll(){
 
@@ -38,10 +32,9 @@ public class DayService {
     private Day transformEntity(DayEntity dayEntity){
 
         int kcalFromProd = 0;
-        User user = userService.transformEntity(dayEntity.getUser());
-
+        var userId = dayEntity.getUser().getId();
         if ( dayEntity.getProducts()==null){
-            return new Day(dayEntity.getId(), dayEntity.getDate(), null, dayEntity.getTodayKcal(), user, dayEntity.getSeason().name());
+            return new Day(dayEntity.getId(), dayEntity.getDate(), null, dayEntity.getTodayKcal(), userId, dayEntity.getSeason().name());
         }
 
         else {
@@ -51,7 +44,7 @@ public class DayService {
                     kcalFromProd = kcalFromProd + pr;
                 }
                 dayEntity.setTodayKcal(kcalFromProd);
-            return new Day(dayEntity.getId(), dayEntity.getDate(), productNames, kcalFromProd, user,dayEntity.getSeason().name());
+            return new Day(dayEntity.getId(), dayEntity.getDate(), productNames, kcalFromProd, userId,dayEntity.getSeason().name());
         }
     }
 

@@ -37,6 +37,10 @@ public class UserCreateOrUpdateRequest {
 
     }
 
+    public UserCreateOrUpdateRequest() {
+
+    }
+
     public String getGender() {
         return gender;
     }

@@ -10,7 +10,7 @@ public class Product {
 
     public Product(Long id, String name, int kcal, String type) {
         this.id = id;
-        this.name = "Portion of "+name;
+        this.name = name;
         this.kcal = kcal;
         this.type=type;
     }

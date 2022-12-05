@@ -60,16 +60,10 @@ public class UserService {
         }
 
         var userEntity = userEntityOptional.get();
-        userEntity.setUsername(request.getUsername());
-        userEntity.setPasswort(request.getPasswort());
         userEntity.setWeight(request.getWeight());
         userEntity.setHeight(request.getHeight());
         userEntity.setAge(request.getAge());
-        userEntity.setBmi(request.getBmi());
-        userEntity.setCategory(request.getCategory());
         userEntity.setGoalW(request.getGoalW());
-        userEntity.setBmr(request.getBmr());
-        userEntity.setGender(Gender.valueOf(request.getGender()));
         userEntity = userRepository.save(userEntity);
 
         return transformEntity(userEntity);

@@ -39,6 +39,7 @@ public class DayCreateOrUpdateRequest {
 
     }
 
+    public DayCreateOrUpdateRequest() {}
 
     public int getDay() {
         return day;
