@@ -89,11 +89,10 @@ class UserRestControllerTest {
 
     @Test
     @DisplayName("should return 201 http status and Location header when creating a user")
-    @Disabled
     void should_return_201_http_status_and_location_header_when_creating_a_user() throws Exception {
 
         // given
-        String userToCreateAsJson = "{\"username\": \"John\", \"passwort\":\"pass123\", \"weight\":\"80.0\", \"height\":\"180.0\", \"age\":\"35\", \"goalW\":\"75\", \"gender\":\"MALE\"}";
+        String userToCreateAsJson = "{\"username\": \"John\", \"passwort\":\"pass123\", \"weight\":80, \"height\":180.0, \"age\":35, \"goalW\":75, \"gender\":\"MALE\", \"days\":null}";
         var user = new User(123, null, null, 0.0, 0.0, 0, 0, null, null);
         doReturn(user).when(userService).create(any());
 
