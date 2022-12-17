@@ -34,7 +34,7 @@ public class DayService {
         int kcalFromProd = 0;
         var userId = dayEntity.getUser().getId();
         if ( dayEntity.getProducts()==null){
-            return new Day(dayEntity.getId(), dayEntity.getDate(), null, dayEntity.getTodayKcal(), userId, dayEntity.getSeason().name());
+            return new Day(dayEntity.getId(), dayEntity.getDate(), null, dayEntity.getTodayKcal(), userId, dayEntity.getSeason().name(), dayEntity.getDayBmr());
         }
 
         else {
@@ -44,7 +44,7 @@ public class DayService {
                     kcalFromProd = kcalFromProd + pr;
                 }
                 dayEntity.setTodayKcal(kcalFromProd);
-            return new Day(dayEntity.getId(), dayEntity.getDate(), productNames, kcalFromProd, userId,dayEntity.getSeason().name());
+            return new Day(dayEntity.getId(), dayEntity.getDate(), productNames, kcalFromProd, userId,dayEntity.getSeason().name(), dayEntity.getDayBmr());
         }
     }
 
@@ -52,7 +52,20 @@ public class DayService {
     public Day create(DayCreateOrUpdateRequest request){
 
         var user = userRepository.findById(request.getUserId()).orElseThrow();
-        var season = DaySeason.valueOf(request.getSeason());
+        DaySeason season = null;
+
+        if(request.getMonth() == 1 || request.getMonth() == 2 || request.getMonth() == 12 ){
+            season = DaySeason.valueOf("WINTER");
+        }
+        if(request.getMonth() == 3 || request.getMonth() == 4 || request.getMonth() == 5 ){
+            season = DaySeason.valueOf("SPRING");
+        }
+        if(request.getMonth() == 6 || request.getMonth() == 7 || request.getMonth() == 8 ){
+            season = DaySeason.valueOf("SUMMER");
+        }
+        if(request.getMonth() == 9 || request.getMonth() == 10 || request.getMonth() == 11 ){
+            season = DaySeason.valueOf("AUTUMN");
+        }
         var DayEntity = new DayEntity(request.getDay(),request.getMonth(),request.getYear(), user, season);
 
         DayEntity = dayRepository.save(DayEntity);

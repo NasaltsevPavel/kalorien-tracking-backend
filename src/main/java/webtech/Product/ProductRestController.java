@@ -50,9 +50,9 @@ public class ProductRestController {
         return  product != null? ResponseEntity.ok(product): ResponseEntity.notFound().build();
     }
 
-    @DeleteMapping("/v1/products/{id}")
-    public ResponseEntity<Void> deleteProduct(@PathVariable Long id){
-        boolean successful = productService.deleteById(id);
+    @DeleteMapping("/v1/products/{name}")
+    public ResponseEntity<Void> deleteProduct(@PathVariable String name){
+        boolean successful = productService.deleteByName(name);
         return successful? ResponseEntity.ok().build() : ResponseEntity.notFound().build();
     }
 

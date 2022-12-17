@@ -42,4 +42,10 @@ public class DayRestController {
         var day = dayService.deleteProduct(id, name);
         return  day != null? ResponseEntity.ok(day): ResponseEntity.notFound().build();
     }
+
+    @DeleteMapping("/v1/days/{id}")
+    public ResponseEntity<Void> deleteDay(@PathVariable Long id){
+        boolean successful = dayService.deleteById(id);
+        return successful? ResponseEntity.ok().build() : ResponseEntity.notFound().build();
+    }
 }

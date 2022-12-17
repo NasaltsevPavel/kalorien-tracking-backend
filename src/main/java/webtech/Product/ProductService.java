@@ -1,9 +1,9 @@
 package webtech.Product;
 
 import org.springframework.stereotype.Service;
-import webtech.Day.DaySeason;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Service
@@ -53,6 +53,15 @@ public class ProductService {
         return ProductEntity.isPresent()? transformEntity(ProductEntity.get()) : null;
     }
 
+    public boolean deleteByName (String name){
+        if(!productRepository.existsByName(name)){
+            return false;
+        }
+        Optional<ProductEntity> product = productRepository.findByName(name);
+        Long id = product.get().getId();
+        productRepository.deleteById(id);
+        return true;
+    }
 
     public Product update(Long id, ProductCreateOrUpdateRequest request){
 

@@ -1,7 +1,4 @@
 package webtech.Day;
-
-import webtech.User.User;
-
 import java.util.ArrayList;
 import java.util.List;
 
@@ -14,28 +11,15 @@ public class DayCreateOrUpdateRequest {
     private int year;
     private List<String> productsNames = new ArrayList<>();
     private int TodayKcal ;
-    private Long userId;
+    private Long userId = 1L;
     private String season;
 
-    public DayCreateOrUpdateRequest(int day, int month, int year, Long userId) {
+    public DayCreateOrUpdateRequest(int day, int month, int year) {
 
         this.day = day;
         this.month = month;
         this.year = year;
-        this.userId = userId;
 
-        if(month == 1 || month == 2 || month == 12 ){
-            this.season = "WINTER";
-        }
-        if(month == 3 || month == 4 || month == 5 ){
-            this.season = "SPRING";
-        }
-        if(month == 6 || month == 7 || month == 8 ){
-            this.season = " SUMMER";
-        }
-        if(month == 9 || month == 10 || month == 11 ){
-            this.season = "AUTUMN";
-        }
 
     }
 

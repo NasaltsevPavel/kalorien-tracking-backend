@@ -1,6 +1,4 @@
 package webtech.Day;
-import webtech.User.User;
-
 import java.util.List;
 
 public class Day {
@@ -11,14 +9,16 @@ public class Day {
     private int TodayKcal;
     private Long userId;
     private String season;
+    private int DayBmr;
 
-    public Day(Long id, String Date, List<String> productsNames, int todayKcal, Long userId, String season) {
+    public Day(Long id, String Date, List<String> productsNames, int todayKcal, Long userId, String season, int dayBmr) {
         this.id = id;
         this.Date = Date;
         this.productsNames = productsNames;
         this.TodayKcal = todayKcal;
         this.userId = userId;
         this.season=season;
+        this.DayBmr = dayBmr;
     }
 
 
@@ -26,6 +26,13 @@ public class Day {
         return id;
     }
 
+    public int getDayBmr() {
+        return DayBmr;
+    }
+
+    public void setDayBmr(int dayBmr) {
+        DayBmr = dayBmr;
+    }
 
     public String getDate() {
         return Date;

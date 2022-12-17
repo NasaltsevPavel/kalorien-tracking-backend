@@ -37,6 +37,9 @@ public class DayEntity {
     @Enumerated(value = EnumType.STRING)
     private DaySeason season;
 
+    @Column(name = "DAY_BMR", nullable = false)
+    private int DayBmr;
+
     public DayEntity(int day, int month, int year, UserEntity user, DaySeason season) {
         if(month <= 9 ){
 
@@ -48,6 +51,7 @@ public class DayEntity {
         TodayKcal = calcK();
         this.user = user;
         this.season=season;
+        this.DayBmr = user.getBmr();
     }
 
     protected DayEntity() {
@@ -138,5 +142,13 @@ public class DayEntity {
 
     public void setSeason(DaySeason season) {
         this.season = season;
+    }
+
+    public int getDayBmr() {
+        return DayBmr;
+    }
+
+    public void setDayBmr(int dayBmr) {
+        DayBmr = dayBmr;
     }
 }
