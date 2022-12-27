@@ -2,6 +2,7 @@ package webtech.Day;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import java.net.URI;
 import java.net.URISyntaxException;
 import java.util.List;
@@ -22,7 +23,7 @@ public class DayRestController {
     }
 
     @PostMapping("/v1/days")
-    public ResponseEntity<Void> createDay(@RequestBody DayCreateOrUpdateRequest request) throws URISyntaxException {
+    public ResponseEntity<Void> createDay(@Valid @RequestBody DayCreateOrUpdateRequest request) throws URISyntaxException {
 
         var day = dayService.create(request);
         URI uri = new URI("/v1/days/"+ day.getId());

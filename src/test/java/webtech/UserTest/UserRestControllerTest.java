@@ -47,8 +47,8 @@ class UserRestControllerTest {
     void should_return_found_users_from_user_service() throws Exception {
         // given
         var users = List.of(
-                new User(111L, "John", "pass123", 80.0, 180.0, 35, 75, "MALE", null),
-                new User(222L, "Maria", "456pass", 60.0, 170.0, 30, 65, "FEMALE", null)
+                new User(111L, "John", 80.0, 180.0, 35, 75, "MALE", null),
+                new User(222L, "Maria", 60.0, 170.0, 30, 65, "FEMALE", null)
         );
         doReturn(users).when(userService).findAll();
 
@@ -59,7 +59,6 @@ class UserRestControllerTest {
                 .andExpect(jsonPath("$.size()").value(2))
                 .andExpect(jsonPath("$[0].id").value(111L))
                 .andExpect(jsonPath("$[0].username").value("John"))
-                .andExpect(jsonPath("$[0].passwort").value("pass123"))
                 .andExpect(jsonPath("$[0].weight").value(80.0))
                 .andExpect(jsonPath("$[0].height").value(180.0))
                 .andExpect(jsonPath("$[0].age").value(35))
@@ -92,8 +91,8 @@ class UserRestControllerTest {
     void should_return_201_http_status_and_location_header_when_creating_a_user() throws Exception {
 
         // given
-        String userToCreateAsJson = "{\"username\": \"John\", \"passwort\":\"pass123\", \"weight\":80, \"height\":180.0, \"age\":35, \"goalW\":75, \"gender\":\"MALE\", \"days\":null}";
-        var user = new User(123, null, null, 0.0, 0.0, 0, 0, null, null);
+        String userToCreateAsJson = "{\"username\": \"John\", \"weight\":80, \"height\":180.0, \"age\":35, \"goalW\":75, \"gender\":\"MALE\", \"days\":null}";
+        var user = new User(123, null, 0.0, 0.0, 0, 0, null, null);
         doReturn(user).when(userService).create(any());
 
         // when

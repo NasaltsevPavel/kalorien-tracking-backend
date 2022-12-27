@@ -5,6 +5,7 @@ import org.springframework.web.bind.annotation.*;
 import webtech.User.User;
 import webtech.User.UserCreateOrUpdateRequest;
 
+import javax.validation.Valid;
 import java.net.URI;
 import java.net.URISyntaxException;
 import java.util.List;
@@ -26,13 +27,10 @@ public class ProductRestController {
 
 
     @PostMapping("/v1/products")
-    public ResponseEntity<Void> createProduct(@RequestBody ProductCreateOrUpdateRequest request) throws URISyntaxException {
-
+    public ResponseEntity<Void> createProduct(@Valid @RequestBody ProductCreateOrUpdateRequest request) throws URISyntaxException {
         var product = productService.create(request);
         URI uri = new URI("/v1/products/"+ product.getId());
         return ResponseEntity.created(uri).build();
-
-
     }
 
 
@@ -55,9 +53,5 @@ public class ProductRestController {
         boolean successful = productService.deleteByName(name);
         return successful? ResponseEntity.ok().build() : ResponseEntity.notFound().build();
     }
-
-
-
-
 
 }

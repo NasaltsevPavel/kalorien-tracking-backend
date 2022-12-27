@@ -1,18 +1,25 @@
 package webtech.User;
 
-import java.util.HashMap;
-import java.util.Map;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Positive;
 
 public class UserCreateOrUpdateRequest {
 
 
     private String username;
-    private String passwort;
+    @NotNull(message = "The weight number must not be null")
+    @Positive(message = "The weight number can't be negativ")
     private int weight;
+    @NotNull(message = "The height number must not be null")
+    @Positive(message = "The height number can't be negativ")
     private int height;
+    @NotNull(message = "The age number must not be null")
+    @Positive(message = "The age number can't be negativ")
     private int age;
     private double bmi;
     private String category;
+    @NotNull(message = "The goal weight number must not be null")
+    @Positive(message = "The goal weight number can't be negativ")
     private int goalW;
     private int bmr;
     private String gender;
@@ -20,11 +27,10 @@ public class UserCreateOrUpdateRequest {
 
 
 
-    public UserCreateOrUpdateRequest(String username, String passwort, int weight, int height, int age, double bmi,
+    public UserCreateOrUpdateRequest(String username, int weight, int height, int age, double bmi,
                                      String category, int goalW
             , int bmr, String gender) {
         this.username = username;
-        this.passwort = passwort;
         this.weight = weight;
         this.height = height;
         this.age = age;
@@ -95,14 +101,6 @@ public class UserCreateOrUpdateRequest {
 
     public void setUsername(String username) {
         this.username = username;
-    }
-
-    public String getPasswort() {
-        return passwort;
-    }
-
-    public void setPasswort(String passwort) {
-        this.passwort = passwort;
     }
 
     public String getCategory() {

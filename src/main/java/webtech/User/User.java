@@ -9,7 +9,6 @@ public class User {
 
     private long id;
     private String username;
-    private String passwort;
     private double weight;
     private double height;
     private int age;
@@ -22,12 +21,11 @@ public class User {
 
 
 
-    public User(long id, String username, String passwort,
+    public User(long id, String username,
                 double weight, double height,
                 int age, int goalW, String gender, List<Long> days) {
         this.id = id;
         this.username = username;
-        this.passwort = passwort;
         this.weight = weight;
         this.height = height;
         this.age = age;
@@ -185,21 +183,12 @@ public class User {
         this.username = username;
     }
 
-
-    public void setPasswort(String passwort) {
-        this.passwort = passwort;
-    }
-
     public String getCategory() {
         return category;
     }
 
     public void setCategory(String category) {
         this.category = category;
-    }
-
-    public String getPasswort() {
-        return passwort;
     }
 
     public String getGender() {

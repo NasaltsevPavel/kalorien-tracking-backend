@@ -1,4 +1,6 @@
 package webtech.Day;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Positive;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -6,8 +8,14 @@ public class DayCreateOrUpdateRequest {
 
 
     private Long id;
+    @NotNull(message = "The day number must not be null")
+    @Positive(message = "The day number can't be negativ")
     private int day;
+    @NotNull(message = "The month number must not be null")
+    @Positive(message = "The month number can't be negativ")
     private int month;
+    @NotNull(message = "The year number must not be null")
+    @Positive(message = "The year number can't be negativ")
     private int year;
     private List<String> productsNames = new ArrayList<>();
     private int TodayKcal ;

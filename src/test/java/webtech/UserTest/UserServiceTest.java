@@ -64,7 +64,6 @@ class UserServiceTest implements WithAssertions {
         var userEntity = Mockito.mock(UserEntity.class);
         doReturn(111L).when(userEntity).getId();
         doReturn("John").when(userEntity).getUsername();
-        doReturn("pass123").when(userEntity).getPasswort();
         doReturn(80.0).when(userEntity).getWeight();
         doReturn(180.0).when(userEntity).getHeight();
         doReturn(35).when(userEntity).getAge();
@@ -77,7 +76,6 @@ class UserServiceTest implements WithAssertions {
         // then
         assertThat(result.getId()).isEqualTo(111);
         assertThat(result.getUsername()).isEqualTo("John");
-        assertThat(result.getPasswort()).isEqualTo("pass123");
         assertThat(result.getWeight()).isEqualTo(80.0);
         assertThat(result.getHeight()).isEqualTo(180.0);
         assertThat(result.getAge()).isEqualTo(35);
@@ -93,9 +91,9 @@ class UserServiceTest implements WithAssertions {
     //@Disabled
     void should_create_user() {
         // given
-        UserCreateOrUpdateRequest request = new UserCreateOrUpdateRequest("John", "pass123", 80,
+        UserCreateOrUpdateRequest request = new UserCreateOrUpdateRequest("John", 80,
                 180, 35, 25.0, "Normal", 75, 1330, "MALE");
-        UserEntity expected = new UserEntity( "John", "pass123", 80.0, 180.0, 35, 75, "normal", 75, 25, Gender.MALE);
+        UserEntity expected = new UserEntity( "John", 80.0, 180.0, 35, 75, "normal", 75, 25, Gender.MALE);
         doReturn(expected).when(repository).save(any());
 
 
@@ -114,9 +112,9 @@ class UserServiceTest implements WithAssertions {
         //@Disabled
     void should_create_user2() {
         // given
-        UserCreateOrUpdateRequest request = new UserCreateOrUpdateRequest("John", "pass123", 80,
+        UserCreateOrUpdateRequest request = new UserCreateOrUpdateRequest("John", 80,
                 180, 35, 25.0, "Normal", 75, 1330, "MALE");
-        UserEntity expected = new UserEntity( "John", "pass123", 80.0, 180.0, 35, 75, "normal", 75, 25, Gender.MALE);
+        UserEntity expected = new UserEntity( "John", 80.0, 180.0, 35, 75, "normal", 75, 25, Gender.MALE);
         doReturn(expected).when(repository).save(any());
 
 
@@ -136,9 +134,9 @@ class UserServiceTest implements WithAssertions {
     @Disabled
     void should_create_user_with_unknown_gender() {
         // given
-        UserCreateOrUpdateRequest request = new UserCreateOrUpdateRequest("John", "pass123", 80,
+        UserCreateOrUpdateRequest request = new UserCreateOrUpdateRequest("John", 80,
                 180, 35, 25.0, "Normal", 75, 1330, null);
-        User expected = new User(111L, "John", "pass123", 80.0, 180.0, 35, 75, null, null);
+        User expected = new User(111L, "John", 80.0, 180.0, 35, 75, null, null);
 
         // when
         User result = underTest.create(request);

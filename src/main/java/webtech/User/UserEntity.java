@@ -24,9 +24,6 @@ public class UserEntity {
     @Column(name = "USER_NAME", nullable = false)
     private String username;
 
-    @Column(name = "USER_PASSWORT", nullable = false)
-    private String passwort;
-
     @Column(name = "USER_WEIGHT", nullable = false)
     private double weight;
 
@@ -55,11 +52,10 @@ public class UserEntity {
     @OneToMany(mappedBy = "user", fetch = FetchType.EAGER)
     private List<DayEntity> days = new ArrayList<>();
 
-    public UserEntity(String username, String passwort,
+    public UserEntity(String username,
                       double weight,double height, int age, double bmi,String category,
                       int goalW, int bmr, Gender gender ) {
         this.username = username;
-        this.passwort = passwort;
         this.weight = weight;
         this.height = height;
         this.age = age;
@@ -244,14 +240,6 @@ public class UserEntity {
 
     public void setUsername(String username) {
         this.username = username;
-    }
-
-    public String getPasswort() {
-        return passwort;
-    }
-
-    public void setPasswort(String passwort) {
-        this.passwort = passwort;
     }
 
     public String getCategory() {

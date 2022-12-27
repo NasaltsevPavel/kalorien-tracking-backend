@@ -3,6 +3,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import webtech.Day.Day;
 
+import javax.validation.Valid;
 import java.net.URI;
 import java.net.URISyntaxException;
 import java.util.List;
@@ -54,7 +55,7 @@ public class UserRestController {
     }
 
     @PutMapping("/v1/users/{id}/{date}")
-    public ResponseEntity<User> addDayToUser(@PathVariable Long id, @PathVariable String date ){
+    public ResponseEntity<User> addDayToUser(@Valid  @PathVariable Long id, @PathVariable String date ){
         var user = userService.addDay(id, date);
         return  user != null? ResponseEntity.ok(user): ResponseEntity.notFound().build();
     }

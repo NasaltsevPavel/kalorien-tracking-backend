@@ -37,7 +37,7 @@ public class UserService {
 
             var gender = Gender.valueOf(request.getGender());
 
-        var UserEntity = new UserEntity(request.getUsername(), request.getPasswort(), request.getWeight(),
+        var UserEntity = new UserEntity(request.getUsername(),request.getWeight(),
                 request.getHeight(), request.getAge(), request.getBmi(), request.getCategory(), request.getGoalW(), request.getBmr(),
                 gender);
         UserEntity = userRepository.save(UserEntity);
@@ -73,7 +73,7 @@ public class UserService {
         var gender = userEntity.getGender() != null ? userEntity.getGender().name(): Gender.UNKNOWN.name();
         var dayIds = userEntity.getDays().stream().map(DayEntity::getId).collect(Collectors.toList());
         return new User(userEntity.getId(),
-                userEntity.getUsername(), userEntity.getPasswort(), userEntity.getWeight(), userEntity.getHeight(),
+                userEntity.getUsername(), userEntity.getWeight(), userEntity.getHeight(),
                 userEntity.getAge(), userEntity.getGoalW(), gender, dayIds);
     }
 
