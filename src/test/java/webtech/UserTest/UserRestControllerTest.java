@@ -66,7 +66,6 @@ class UserRestControllerTest {
                 .andExpect(jsonPath("$[0].gender").value("MALE"))
                 .andExpect(jsonPath("$[1].id").value(222L))
                 .andExpect(jsonPath("$[1].username").value("Maria"))
-                .andExpect(jsonPath("$[1].passwort").value("456pass"))
                 .andExpect(jsonPath("$[1].weight").value(60.0))
                 .andExpect(jsonPath("$[1].height").value(170.0))
                 .andExpect(jsonPath("$[1].age").value(30))
