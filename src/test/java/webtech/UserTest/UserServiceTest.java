@@ -88,7 +88,6 @@ class UserServiceTest implements WithAssertions {
 
     @Test
     @DisplayName("should create user if all variables are correct")
-    //@Disabled
     void should_create_user() {
         // given
         UserCreateOrUpdateRequest request = new UserCreateOrUpdateRequest("John", 80,
@@ -99,17 +98,13 @@ class UserServiceTest implements WithAssertions {
 
         // when
         User actual = underTest.create(request);
-        //actual.setId(expected.getId());
-        //boolean result = underTest.createdCheck(111L);
 
         // then
         assertEquals(expected.getAge(), actual.getAge());
-        //assertThat(result).isTrue();
     }
 
     @Test
     @DisplayName("should create user if all variables are correct")
-        //@Disabled
     void should_create_user2() {
         // given
         UserCreateOrUpdateRequest request = new UserCreateOrUpdateRequest("John", 80,
@@ -120,28 +115,11 @@ class UserServiceTest implements WithAssertions {
 
         // when
         User actual = underTest.create(request);
-        //actual.setId(expected.getId());
-        //boolean result = underTest.createdCheck(111L);
+
 
         // then
         ArgumentCaptor<UserEntity> captor = ArgumentCaptor.forClass(UserEntity.class);
         verify(repository).save(captor.capture());
         assertEquals(request.getAge(), captor.getValue().getAge());
-    }
-
-    @Test
-    @DisplayName("should create user with unknown gender if it is null")
-    @Disabled
-    void should_create_user_with_unknown_gender() {
-        // given
-        UserCreateOrUpdateRequest request = new UserCreateOrUpdateRequest("John", 80,
-                180, 35, 25.0, "Normal", 75, 1330, null);
-        User expected = new User(111L, "John", 80.0, 180.0, 35, 75, null, null);
-
-        // when
-        User result = underTest.create(request);
-
-        // then
-        assertEquals(expected, result);
     }
 }
